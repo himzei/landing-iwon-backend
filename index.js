@@ -2,4 +2,4 @@ import express from "express";
 
 const app = express();
 
-console.log("hi");
+console.log("hi im good");
