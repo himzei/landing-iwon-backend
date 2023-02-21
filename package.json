@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/index.js"
+    "dev": "nodemon --exec babel-node src/init.js"
   },
   "repository": {
     "type": "git",
@@ -15,9 +15,13 @@
   },
   "homepage": "https://github.com/himzei/landing-ican-backend#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^6.9.2",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "ws": "^8.12.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
