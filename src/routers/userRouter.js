@@ -1,9 +1,20 @@
 import express from "express";
-import { getJoin, postJoin, postLogin } from "../controllers/userController";
+import {
+  accessToken,
+  loginSuccess,
+  logout,
+  postJoin,
+  postLogin,
+  refreshToken,
+} from "../controllers/userController";
 
 const userRouter = express.Router();
 
-userRouter.route("/signup").get(getJoin).post(postJoin);
+userRouter.post("/signup", postJoin);
 userRouter.post("/login", postLogin);
+userRouter.get("/accessToken", accessToken);
+userRouter.get("/refreshToken", refreshToken);
+userRouter.get("/login/success", loginSuccess);
+userRouter.post("/logout", logout);
 
 export default userRouter;
