@@ -8,7 +8,7 @@ import "./models/User";
 import app from "./server";
 
 const handleListening = () =>
-  console.log(`Server listening on http://localhost:4000`);
+  console.log(`Server listening on http://localhost:${process.env.PORT}`);
 
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
