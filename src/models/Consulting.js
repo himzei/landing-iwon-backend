@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const consultingSchema = new mongoose.Schema({
+  type: String,
   name: String,
   tel: String,
   email: String,

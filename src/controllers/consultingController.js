@@ -11,8 +11,8 @@ export const getList = async (req, res) => {
 };
 
 export const postWrite = async (req, res) => {
-  const { name, email, tel, category, message } = req.body;
-  console.log(name, email, tel, category, message);
+  const { name, email, tel, category, message, type } = req.body;
+  console.log(name, email, tel, category, message, type);
 
   if (name === "" || email === "" || tel === "") {
     res.json({ ok: "false", error: "필수 입력사항을 작성하셔야 합니다. " });
@@ -20,6 +20,7 @@ export const postWrite = async (req, res) => {
 
   try {
     await Consulting.create({
+      type,
       name,
       email,
       tel,

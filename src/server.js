@@ -8,7 +8,7 @@ import consultingRouter from "./routers/consultingRouter";
 const app = express();
 
 let corsOptions = {
-  origin: ["http://localhost:3000"],
+  origin: ["http://localhost:3000", "https://iwon-philippines.netlify.app"],
   methods: ["GET", "POST"],
   credentials: true,
 };
