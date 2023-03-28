@@ -26,7 +26,7 @@ export const postWrite = async (req, res) => {
       tel,
       category,
       message,
-      createdAt: Date.now(),
+      createdAt: Date.now()
     });
     res.json({ ok: "true" });
   } catch (error) {

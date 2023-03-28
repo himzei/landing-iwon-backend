@@ -1,12 +1,5 @@
 import express from "express";
-import {
-  accessToken,
-  loginSuccess,
-  logout,
-  postJoin,
-  postLogin,
-  refreshToken,
-} from "../controllers/userController.js";
+import { accessToken, loginSuccess, logout, postJoin, postLogin, refreshToken } from "../controllers/userController.js";
 
 const userRouter = express.Router();
 

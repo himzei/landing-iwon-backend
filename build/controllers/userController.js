@@ -22,19 +22,15 @@ export const refreshToken = async (req, res) => {
     const userData = await User.findOne({ _id: data.id });
 
     // accessToken 새로발급
-    const accessToken = jwt.sign(
-      {
-        id: userData._id,
-      },
-      process.env.ACCESS_SECRET,
-      {
-        expiresIn: "1m",
-      }
-    );
+    const accessToken = jwt.sign({
+      id: userData._id
+    }, process.env.ACCESS_SECRET, {
+      expiresIn: "1m"
+    });
 
     res.cookie("accessToken", accessToken, {
       secure: false,
-      httpOnly: true,
+      httpOnly: true
     });
 
     res.status(200).json({ ok: true });
@@ -49,9 +45,7 @@ export const loginSuccess = async (req, res) => {
     const data = jwt.verify(token, process.env.ACCESS_SECRET);
     const userData = await User.findOne({ _id: data.id });
 
-    res
-      .status(200)
-      .json({ ok: true, email: userData.email, username: userData.username });
+    res.status(200).json({ ok: true, email: userData.email, username: userData.username });
   } catch (error) {
     res.status(500).json({ ok: false, error });
   }
@@ -81,36 +75,28 @@ export const postLogin = async (req, res) => {
 
   try {
     // accessToken 발급
-    const accessToken = jwt.sign(
-      {
-        id: user._id,
-      },
-      process.env.ACCESS_SECRET,
-      {
-        expiresIn: "1m",
-      }
-    );
+    const accessToken = jwt.sign({
+      id: user._id
+    }, process.env.ACCESS_SECRET, {
+      expiresIn: "1m"
+    });
 
     // refreshToekn 발급
-    const refreshToken = jwt.sign(
-      {
-        id: user._id,
-      },
-      process.env.REFRESH_SECRET,
-      {
-        expiresIn: "24h",
-      }
-    );
+    const refreshToken = jwt.sign({
+      id: user._id
+    }, process.env.REFRESH_SECRET, {
+      expiresIn: "24h"
+    });
 
     // token 전송
     res.cookie("accessToken", accessToken, {
       secure: false,
-      httpOnly: true,
+      httpOnly: true
     });
 
     res.cookie("refreshToken", refreshToken, {
       secure: false,
-      httpOnly: true,
+      httpOnly: true
     });
 
     res.status(200).json({ ok: true });
@@ -140,7 +126,7 @@ export const postJoin = async (req, res) => {
       username,
       email,
       password,
-      createdAt: Date.now(),
+      createdAt: Date.now()
     });
     res.json({ ok: "true" });
   } catch (error) {

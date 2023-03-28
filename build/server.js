@@ -10,7 +10,7 @@ const app = express();
 let corsOptions = {
   origin: ["http://localhost:3000", "https://iwon-philippines.netlify.app"],
   methods: ["GET", "POST"],
-  credentials: true,
+  credentials: true
 };
 
 app.use(cors(corsOptions));

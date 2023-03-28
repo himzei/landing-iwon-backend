@@ -2,7 +2,10 @@
   "name": "landing-ican-back",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "scripts": {
+    "start": "node build/web.js",
+    "build": "babel src -d build",
     "dev": "nodemon --exec babel-node src/web.js"
   },
   "repository": {
