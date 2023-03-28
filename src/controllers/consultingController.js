@@ -1,4 +1,18 @@
 import Consulting from "../models/Consulting.js";
+// import { SolapiMessageService } from "solapi";
+// const messageService = new SolapiMessageService(
+//   process.env.SOLAPI_API_KEY,
+//   process.env.SOLAPI_SECRET_KEY
+// );
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.MAIL_ID,
+    pass: process.env.MAIL_PASSWORD,
+  },
+});
 
 export const getList = async (req, res) => {
   try {
@@ -12,11 +26,27 @@ export const getList = async (req, res) => {
 
 export const postWrite = async (req, res) => {
   const { name, email, tel, category, message, type } = req.body;
-  console.log(name, email, tel, category, message, type);
 
   if (name === "" || email === "" || tel === "") {
     res.json({ ok: "false", error: "필수 입력사항을 작성하셔야 합니다. " });
   }
+
+  const mailOptions = {
+    from: process.env.MAIL_ID,
+    to: process.env.MAIL_ID,
+    subject: name + "님의 " + type,
+    html: `
+			<h1>${type}</h1>
+			<h2>전화번호 : ${tel}</h2>
+			<h2>관심분야 : ${category}</h2>
+			<h2>전화번호 : ${tel}</h2>
+			
+		`,
+    text: message,
+  };
+
+  const info = await transporter.sendMail(mailOptions);
+  console.log(info);
 
   try {
     await Consulting.create({
