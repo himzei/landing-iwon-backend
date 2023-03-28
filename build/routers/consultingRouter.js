@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 var _express = _interopRequireDefault(require("express"));
-var _consultingController = require("../controllers/consultingController.js");
+var _consultingController = require("../controllers/consultingController");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 var consultingRouter = _express["default"].Router();
 consultingRouter.get("", _consultingController.getList);

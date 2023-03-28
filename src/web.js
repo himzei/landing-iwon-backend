@@ -1,11 +1,11 @@
 import http from "http";
 import { WebSocketServer } from "ws";
 import "dotenv/config";
-import "./db.js";
-import "./models/Consulting.js";
-import "./models/Community.js";
-import "./models/User.js";
-import app from "./server.js";
+import "./db";
+import "./models/Consulting";
+import "./models/Community";
+import "./models/User";
+import app from "./server";
 
 const handleListening = () =>
   console.log(`Server listening on http://localhost:${process.env.PORT}`);

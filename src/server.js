@@ -2,8 +2,8 @@ import express from "express";
 import logger from "morgan";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import userRouter from "./routers/userRouter.js";
-import consultingRouter from "./routers/consultingRouter.js";
+import userRouter from "./routers/userRouter";
+import consultingRouter from "./routers/consultingRouter";
 
 const app = express();
 

@@ -6,7 +6,7 @@ import {
   postJoin,
   postLogin,
   refreshToken,
-} from "../controllers/userController.js";
+} from "../controllers/userController";
 
 const userRouter = express.Router();
 

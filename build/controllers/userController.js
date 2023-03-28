@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.refreshToken = exports.postLogin = exports.postJoin = exports.logout = exports.loginSuccess = exports.accessToken = void 0;
-var _User = _interopRequireDefault(require("../models/User.js"));
+var _User = _interopRequireDefault(require("../models/User"));
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
 var _bcrypt = _interopRequireDefault(require("bcrypt"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }

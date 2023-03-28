@@ -8,12 +8,12 @@ var _express = _interopRequireDefault(require("express"));
 var _morgan = _interopRequireDefault(require("morgan"));
 var _cors = _interopRequireDefault(require("cors"));
 var _cookieParser = _interopRequireDefault(require("cookie-parser"));
-var _userRouter = _interopRequireDefault(require("./routers/userRouter.js"));
-var _consultingRouter = _interopRequireDefault(require("./routers/consultingRouter.js"));
+var _userRouter = _interopRequireDefault(require("./routers/userRouter"));
+var _consultingRouter = _interopRequireDefault(require("./routers/consultingRouter"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 var app = (0, _express["default"])();
 var corsOptions = {
-  origin: "*",
+  origin: true,
   methods: ["GET", "POST"],
   credentials: true
 };

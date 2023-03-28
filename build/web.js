@@ -3,11 +3,11 @@
 var _http = _interopRequireDefault(require("http"));
 var _ws = require("ws");
 require("dotenv/config");
-require("./db.js");
-require("./models/Consulting.js");
-require("./models/Community.js");
-require("./models/User.js");
-var _server = _interopRequireDefault(require("./server.js"));
+require("./db");
+require("./models/Consulting");
+require("./models/Community");
+require("./models/User");
+var _server = _interopRequireDefault(require("./server"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 var handleListening = function handleListening() {
   return console.log("Server listening on http://localhost:".concat(process.env.PORT));

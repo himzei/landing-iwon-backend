@@ -1,4 +1,4 @@
-import Consulting from "../models/Consulting.js";
+import Consulting from "../models/Consulting";
 // import { SolapiMessageService } from "solapi";
 // const messageService = new SolapiMessageService(
 //   process.env.SOLAPI_API_KEY,
