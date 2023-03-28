@@ -2,7 +2,7 @@
   "name": "landing-ican-back",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "start": "node build/web.js",
     "build": "babel src -d build",
