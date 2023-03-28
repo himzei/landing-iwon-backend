@@ -8,7 +8,7 @@ import consultingRouter from "./routers/consultingRouter.js";
 const app = express();
 
 let corsOptions = {
-  origin: ["https://iwon-philippines.netlify.app/"],
+  origin: ["https://iwon-philippines.netlify.app"],
   methods: ["GET", "POST"],
   credentials: true,
 };
