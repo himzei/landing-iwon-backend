@@ -8,7 +8,7 @@ import consultingRouter from "./routers/consultingRouter.js";
 const app = express();
 
 let corsOptions = {
-  origin: ["*"],
+  origin: true,
   methods: ["GET", "POST"],
   credentials: true,
 };
