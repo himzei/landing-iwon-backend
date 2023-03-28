@@ -1,13 +1,18 @@
-import express from "express";
-import { accessToken, loginSuccess, logout, postJoin, postLogin, refreshToken } from "../controllers/userController.js";
+"use strict";
 
-const userRouter = express.Router();
-
-userRouter.post("/signup", postJoin);
-userRouter.post("/login", postLogin);
-userRouter.get("/accessToken", accessToken);
-userRouter.get("/refreshToken", refreshToken);
-userRouter.get("/login/success", loginSuccess);
-userRouter.post("/logout", logout);
-
-export default userRouter;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+var _express = _interopRequireDefault(require("express"));
+var _userController = require("../controllers/userController.js");
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+var userRouter = _express["default"].Router();
+userRouter.post("/signup", _userController.postJoin);
+userRouter.post("/login", _userController.postLogin);
+userRouter.get("/accessToken", _userController.accessToken);
+userRouter.get("/refreshToken", _userController.refreshToken);
+userRouter.get("/login/success", _userController.loginSuccess);
+userRouter.post("/logout", _userController.logout);
+var _default = userRouter;
+exports["default"] = _default;

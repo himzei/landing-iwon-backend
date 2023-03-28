@@ -1,25 +1,30 @@
-import express from "express";
-import logger from "morgan";
-import cors from "cors";
-import cookieParser from "cookie-parser";
-import userRouter from "./routers/userRouter.js";
-import consultingRouter from "./routers/consultingRouter.js";
+"use strict";
 
-const app = express();
-
-let corsOptions = {
-  origin: ["http://localhost:3000", "https://iwon-philippines.netlify.app"],
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+var _express = _interopRequireDefault(require("express"));
+var _morgan = _interopRequireDefault(require("morgan"));
+var _cors = _interopRequireDefault(require("cors"));
+var _cookieParser = _interopRequireDefault(require("cookie-parser"));
+var _userRouter = _interopRequireDefault(require("./routers/userRouter.js"));
+var _consultingRouter = _interopRequireDefault(require("./routers/consultingRouter.js"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+var app = (0, _express["default"])();
+var corsOptions = {
+  origin: "*",
   methods: ["GET", "POST"],
   credentials: true
 };
-
-app.use(cors(corsOptions));
-app.use(logger("dev"));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(cookieParser());
-
-app.use("/api/v1/users", userRouter);
-app.use("/api/v1/consulting", consultingRouter);
-
-export default app;
+app.use((0, _cors["default"])(corsOptions));
+app.use((0, _morgan["default"])("dev"));
+app.use(_express["default"].urlencoded({
+  extended: true
+}));
+app.use(_express["default"].json());
+app.use((0, _cookieParser["default"])());
+app.use("/api/v1/users", _userRouter["default"]);
+app.use("/api/v1/consulting", _consultingRouter["default"]);
+var _default = app;
+exports["default"] = _default;

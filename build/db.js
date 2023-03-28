@@ -1,15 +1,18 @@
-import mongoose from "mongoose";
+"use strict";
 
-mongoose.set("strictQuery", false);
-mongoose.connect(process.env.DB_URL, {
+var _mongoose = _interopRequireDefault(require("mongoose"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+_mongoose["default"].set("strictQuery", false);
+_mongoose["default"].connect(process.env.DB_URL, {
   useNewurlParser: true,
   useUnifiedTopology: true
 });
-
-const db = mongoose.connection;
-
-const handleOpen = () => console.log("Connected to DB");
-const handleError = error => console.log("DB Error", error);
-
+var db = _mongoose["default"].connection;
+var handleOpen = function handleOpen() {
+  return console.log("Connected to DB");
+};
+var handleError = function handleError(error) {
+  return console.log("DB Error", error);
+};
 db.on("error", handleError);
 db.once("open", handleOpen);
