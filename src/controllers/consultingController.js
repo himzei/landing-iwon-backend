@@ -61,17 +61,17 @@ export const postWrite = async (req, res) => {
     to: tel,
     from: "01071860119",
     kakaoOptions: {
-      pfId: "KA01PF230329051922023KlYEZs68aq8",
-      templateId: "KA01TP230329052129166Bg7FbL0vhdr",
+      pfId: "KA01PF230329052246587htCxbWQq2P1",
+      templateId: "KA01TP230329070149638ka9toTFP1Hn",
       // 치환문구가 없을 때의 기본 형태
       variables: {
         "#{name}": name,
         "#{type}": type,
-        "#{urlManila}": "https://iwon-philippines.netlify.app/",
-        "#{urlCebu}": "https://iwon-philippines.netlify.app/",
-        "#{urlCebuMonth}": "https://iwon-philippines.netlify.app/",
-        "#{urlDal}": "https://iwon-philippines.netlify.app/",
-        "#{urlBagio}": "https://iwon-philippines.netlify.app/",
+        "#{urlManila}": "iwon-philippines.netlify.app/",
+        "#{urlCebu}": "iwon-philippines.netlify.app/",
+        "#{urlCebuMonth}": "iwon-philippines.netlify.app/",
+        "#{urlDal}": "iwon-philippines.netlify.app/",
+        "#{urlBagio}": "iwon-philippines.netlify.app/",
       },
 
       // 치환문구가 있는 경우 추가, 반드시 key, value 모두 string으로 기입해야 합니다.
