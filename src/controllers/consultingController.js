@@ -67,9 +67,9 @@ export const postWrite = async (req, res) => {
       variables: {
         "#{name}": name,
         "#{type}": type,
-        "#{urlManila}": "iwon-philippines.netlify.app/",
+        "#{urlManila}": "iwon-philippines.netlify.app",
         "#{urlCebu}": "iwon-philippines.netlify.app/",
-        "#{urlCebuMonth}": "iwon-philippines.netlify.app/",
+        "#{urlCebuMonth}": "iwon-cebu-month.netlify.app",
         "#{urlDal}": "iwon-philippines.netlify.app/",
         "#{urlBagio}": "iwon-philippines.netlify.app/",
       },
