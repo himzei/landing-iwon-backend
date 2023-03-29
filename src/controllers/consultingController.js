@@ -45,6 +45,10 @@ export const postWrite = async (req, res) => {
   		<h2>전화번호 : ${tel}</h2>
   		<h2>관심분야 : ${category}</h2>
   		<h2>전화번호 : ${tel}</h2>
+			<h2>문의내용</h2>
+			<div>
+			${message}
+			</div>
 
   	`,
     text: message,
