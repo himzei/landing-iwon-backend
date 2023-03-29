@@ -13,6 +13,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 var transporter = _nodemailer["default"].createTransport({
   service: "gmail",
+  prot: 587,
+  host: "smtp.gmail.com",
+  secure: false,
+  requireTLS: true,
   auth: {
     user: process.env.MAIL_ID,
     pass: process.env.MAIL_PASSWORD
@@ -54,7 +58,7 @@ var getList = /*#__PURE__*/function () {
 exports.getList = getList;
 var postWrite = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(req, res) {
-    var _req$body, name, email, tel, category, message, type;
+    var _req$body, name, email, tel, category, message, type, mailOptions, info;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
@@ -65,25 +69,20 @@ var postWrite = /*#__PURE__*/function () {
               error: "필수 입력사항을 작성하셔야 합니다. "
             });
           }
-
-          // const mailOptions = {
-          //   from: process.env.MAIL_ID,
-          //   to: process.env.MAIL_ID,
-          //   subject: name + "님의 " + type,
-          //   html: `
-          // 		<h1>${type}</h1>
-          // 		<h2>전화번호 : ${tel}</h2>
-          // 		<h2>관심분야 : ${category}</h2>
-          // 		<h2>전화번호 : ${tel}</h2>
-
-          // 	`,
-          //   text: message,
-          // };
-
-          // const info = await transporter.sendMail(mailOptions);
-          // console.log(info);
-          _context2.prev = 2;
+          mailOptions = {
+            from: email,
+            to: "himzei@gmail.com",
+            subject: name + "님의 " + type,
+            html: "\n  \t\t<h1>".concat(type, "</h1>\n\t\t\t<H2>\uC774\uBA54\uC77C : ").concat(email, "</h2>\n  \t\t<h2>\uC804\uD654\uBC88\uD638 : ").concat(tel, "</h2>\n  \t\t<h2>\uAD00\uC2EC\uBD84\uC57C : ").concat(category, "</h2>\n  \t\t<h2>\uC804\uD654\uBC88\uD638 : ").concat(tel, "</h2>\n\n  \t"),
+            text: message
+          };
           _context2.next = 5;
+          return transporter.sendMail(mailOptions);
+        case 5:
+          info = _context2.sent;
+          console.log(info);
+          _context2.prev = 7;
+          _context2.next = 10;
           return _Consulting["default"].create({
             type: type,
             name: name,
@@ -93,25 +92,25 @@ var postWrite = /*#__PURE__*/function () {
             message: message,
             createdAt: Date.now()
           });
-        case 5:
+        case 10:
           res.json({
             ok: "true"
           });
-          _context2.next = 12;
+          _context2.next = 17;
           break;
-        case 8:
-          _context2.prev = 8;
-          _context2.t0 = _context2["catch"](2);
+        case 13:
+          _context2.prev = 13;
+          _context2.t0 = _context2["catch"](7);
           console.log(_context2.t0);
           res.json({
             ok: "false",
             error: "\uC5D0\uB7EC\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4. ".concat(_context2.t0.code)
           });
-        case 12:
+        case 17:
         case "end":
           return _context2.stop();
       }
-    }, _callee2, null, [[2, 8]]);
+    }, _callee2, null, [[7, 13]]);
   }));
   return function postWrite(_x3, _x4) {
     return _ref2.apply(this, arguments);
