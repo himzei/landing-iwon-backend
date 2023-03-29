@@ -37,7 +37,7 @@ export const postWrite = async (req, res) => {
 
   const mailOptions = {
     from: email,
-    to: "himzei@gmail.com",
+    to: ["himzei@gmail.com", "spacehim@daum.net"],
     subject: name + "님의 " + type,
     html: `
   		<h1>${type}</h1>
