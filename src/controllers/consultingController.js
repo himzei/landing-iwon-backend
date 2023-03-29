@@ -1,9 +1,9 @@
 import Consulting from "../models/Consulting";
-// import { SolapiMessageService } from "solapi";
-// const messageService = new SolapiMessageService(
-//   process.env.SOLAPI_API_KEY,
-//   process.env.SOLAPI_SECRET_KEY
-// );
+import { SolapiMessageService } from "solapi";
+const messageService = new SolapiMessageService(
+  process.env.SOLAPI_API_KEY,
+  process.env.SOLAPI_SECRET_KEY
+);
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
@@ -37,15 +37,15 @@ export const postWrite = async (req, res) => {
 
   const mailOptions = {
     from: email,
-    to: ["himzei@gmail.com", "spacehim@daum.net"],
-    subject: name + "님의 " + type,
+    to: ["himzei@gmail.com", "iwonuhak@gmail.com"],
+    subject: "[아이원 마닐라]" + name + "님의 " + type + " 문의",
     html: `
   		<h1>${type}</h1>
-			<H2>이메일 : ${email}</h2>
-  		<h2>전화번호 : ${tel}</h2>
-  		<h2>관심분야 : ${category}</h2>
-  		<h2>전화번호 : ${tel}</h2>
-			<h2>문의내용</h2>
+			<H3>이메일 : ${email}</h3>
+  		<h3>전화번호 : ${tel}</h3>
+  		<h3>관심분야 : ${category}</h3>
+  		<h3>전화번호 : ${tel}</h3>
+			<h3>문의내용</h3>
 			<div>
 			${message}
 			</div>
@@ -56,6 +56,35 @@ export const postWrite = async (req, res) => {
 
   const info = await transporter.sendMail(mailOptions);
   console.log(info);
+
+  messageService.send({
+    to: tel,
+    from: "01071860119",
+    kakaoOptions: {
+      pfId: "KA01PF230329051922023KlYEZs68aq8",
+      templateId: "KA01TP230329052129166Bg7FbL0vhdr",
+      // 치환문구가 없을 때의 기본 형태
+      variables: {
+        "#{name}": name,
+        "#{type}": type,
+        "#{urlManila}": "https://iwon-philippines.netlify.app/",
+        "#{urlCebu}": "https://iwon-philippines.netlify.app/",
+        "#{urlCebuMonth}": "https://iwon-philippines.netlify.app/",
+        "#{urlDal}": "https://iwon-philippines.netlify.app/",
+        "#{urlBagio}": "https://iwon-philippines.netlify.app/",
+      },
+
+      // 치환문구가 있는 경우 추가, 반드시 key, value 모두 string으로 기입해야 합니다.
+      /*
+    variables: {
+      "#{변수명}": "임의의 값"
+    }
+    */
+
+      // disbaleSms 값을 true로 줄 경우 문자로의 대체발송이 비활성화 됩니다.
+      // disableSms: true,
+    },
+  });
 
   try {
     await Consulting.create({
