@@ -54,7 +54,7 @@ var getList = /*#__PURE__*/function () {
 exports.getList = getList;
 var postWrite = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(req, res) {
-    var _req$body, name, email, tel, category, message, type, mailOptions, info;
+    var _req$body, name, email, tel, category, message, type;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
@@ -65,20 +65,25 @@ var postWrite = /*#__PURE__*/function () {
               error: "필수 입력사항을 작성하셔야 합니다. "
             });
           }
-          mailOptions = {
-            from: process.env.MAIL_ID,
-            to: process.env.MAIL_ID,
-            subject: name + "님의 " + type,
-            html: "\n\t\t\t<h1>".concat(type, "</h1>\n\t\t\t<h2>\uC804\uD654\uBC88\uD638 : ").concat(tel, "</h2>\n\t\t\t<h2>\uAD00\uC2EC\uBD84\uC57C : ").concat(category, "</h2>\n\t\t\t<h2>\uC804\uD654\uBC88\uD638 : ").concat(tel, "</h2>\n\t\t\t\n\t\t"),
-            text: message
-          };
+
+          // const mailOptions = {
+          //   from: process.env.MAIL_ID,
+          //   to: process.env.MAIL_ID,
+          //   subject: name + "님의 " + type,
+          //   html: `
+          // 		<h1>${type}</h1>
+          // 		<h2>전화번호 : ${tel}</h2>
+          // 		<h2>관심분야 : ${category}</h2>
+          // 		<h2>전화번호 : ${tel}</h2>
+
+          // 	`,
+          //   text: message,
+          // };
+
+          // const info = await transporter.sendMail(mailOptions);
+          // console.log(info);
+          _context2.prev = 2;
           _context2.next = 5;
-          return transporter.sendMail(mailOptions);
-        case 5:
-          info = _context2.sent;
-          console.log(info);
-          _context2.prev = 7;
-          _context2.next = 10;
           return _Consulting["default"].create({
             type: type,
             name: name,
@@ -88,25 +93,25 @@ var postWrite = /*#__PURE__*/function () {
             message: message,
             createdAt: Date.now()
           });
-        case 10:
+        case 5:
           res.json({
             ok: "true"
           });
-          _context2.next = 17;
+          _context2.next = 12;
           break;
-        case 13:
-          _context2.prev = 13;
-          _context2.t0 = _context2["catch"](7);
+        case 8:
+          _context2.prev = 8;
+          _context2.t0 = _context2["catch"](2);
           console.log(_context2.t0);
           res.json({
             ok: "false",
             error: "\uC5D0\uB7EC\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4. ".concat(_context2.t0.code)
           });
-        case 17:
+        case 12:
         case "end":
           return _context2.stop();
       }
-    }, _callee2, null, [[7, 13]]);
+    }, _callee2, null, [[2, 8]]);
   }));
   return function postWrite(_x3, _x4) {
     return _ref2.apply(this, arguments);

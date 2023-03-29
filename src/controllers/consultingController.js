@@ -31,22 +31,22 @@ export const postWrite = async (req, res) => {
     res.json({ ok: "false", error: "필수 입력사항을 작성하셔야 합니다. " });
   }
 
-  const mailOptions = {
-    from: process.env.MAIL_ID,
-    to: process.env.MAIL_ID,
-    subject: name + "님의 " + type,
-    html: `
-			<h1>${type}</h1>
-			<h2>전화번호 : ${tel}</h2>
-			<h2>관심분야 : ${category}</h2>
-			<h2>전화번호 : ${tel}</h2>
-			
-		`,
-    text: message,
-  };
+  // const mailOptions = {
+  //   from: process.env.MAIL_ID,
+  //   to: process.env.MAIL_ID,
+  //   subject: name + "님의 " + type,
+  //   html: `
+  // 		<h1>${type}</h1>
+  // 		<h2>전화번호 : ${tel}</h2>
+  // 		<h2>관심분야 : ${category}</h2>
+  // 		<h2>전화번호 : ${tel}</h2>
 
-  const info = await transporter.sendMail(mailOptions);
-  console.log(info);
+  // 	`,
+  //   text: message,
+  // };
+
+  // const info = await transporter.sendMail(mailOptions);
+  // console.log(info);
 
   try {
     await Consulting.create({
