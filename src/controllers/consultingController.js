@@ -71,7 +71,7 @@ export const postWrite = async (req, res) => {
         "#{urlCebu}": "iwon-philippines.netlify.app/",
         "#{urlCebuMonth}": "iwon-cebu-month.netlify.app",
         "#{urlDal}": "iwon-philippines.netlify.app/",
-        "#{urlBagio}": "iwon-philippines.netlify.app/",
+        "#{urlBagio}": "iwon-baguio.netlify.app/",
       },
 
       // 치환문구가 있는 경우 추가, 반드시 key, value 모두 string으로 기입해야 합니다.
