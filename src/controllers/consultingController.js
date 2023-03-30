@@ -38,7 +38,7 @@ export const postWrite = async (req, res) => {
   const mailOptions = {
     from: email,
     to: ["himzei@gmail.com", "iwonuhak@gmail.com"],
-    subject: "[아이원 마닐라]" + name + "님의 " + type + " 문의",
+    subject: "[아이원유학]" + name + "님의 " + type + " 문의",
     html: `
   		<h1>${type}</h1>
 			<H3>이메일 : ${email}</h3>
@@ -68,9 +68,9 @@ export const postWrite = async (req, res) => {
         "#{name}": name,
         "#{type}": type,
         "#{urlManila}": "iwon-philippines.netlify.app",
-        "#{urlCebu}": "iwon-philippines.netlify.app/",
+        "#{urlCebu}": "iwon-cebu.netlify.app",
         "#{urlCebuMonth}": "iwon-cebu-month.netlify.app",
-        "#{urlDal}": "iwon-philippines.netlify.app/",
+        "#{urlDal}": "iwon-tarlac.netlify.app",
         "#{urlBagio}": "iwon-baguio.netlify.app/",
       },
 
