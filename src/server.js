@@ -15,6 +15,7 @@ let corsOptions = {
     "https://iwon-tarlac.netlify.app",
     "https://iwon-cebu.netlify.app",
     "https://iwon-philippines.netlify.app",
+    "https://university-bigdata.netlify.app",
   ],
   methods: ["GET", "POST"],
   credentials: true,

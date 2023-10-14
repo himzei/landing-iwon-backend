@@ -1,9 +1,12 @@
 import Consulting from "../models/Consulting";
+
+// 알림톡 임포트
 import { SolapiMessageService } from "solapi";
 const messageService = new SolapiMessageService(
   process.env.SOLAPI_API_KEY,
   process.env.SOLAPI_SECRET_KEY
 );
+// 알림톡 끝
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
@@ -54,6 +57,7 @@ export const postWrite = async (req, res) => {
     text: message,
   };
 
+  // 알림톡 시작
   const info = await transporter.sendMail(mailOptions);
   console.log(info);
 
@@ -76,6 +80,8 @@ export const postWrite = async (req, res) => {
       disableSms: true,
     },
   });
+
+  // 알림톡 끝
 
   try {
     await Consulting.create({
