@@ -2,12 +2,13 @@ import Consulting from "../models/Consulting";
 
 // 알림톡 임포트
 import { SolapiMessageService } from "solapi";
+// 알림톡 끝
+import nodemailer from "nodemailer";
+
 const messageService = new SolapiMessageService(
   process.env.SOLAPI_API_KEY,
   process.env.SOLAPI_SECRET_KEY
 );
-// 알림톡 끝
-import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -32,10 +33,12 @@ export const getList = async (req, res) => {
 };
 
 export const postUniversity = async (req, res) => {
-  const { name, email, tel, category, message, type } = req.body;
+  const { name, email, tel, message, type } = req.body;
+
+  console.log(name, email, tel, message, type);
 
   if (name === "" || email === "" || tel === "") {
-    res.json({ ok: "false", error: "필수 입력사항을 작성하셔야 합니다. " });
+    res.json({ result: 1, message: "이름/이메일/전화번호를 입력해 주세요" });
   }
 
   const mailOptions = {
@@ -44,14 +47,12 @@ export const postUniversity = async (req, res) => {
     subject: "[대구한의대]" + name + "님의 " + type + " 문의",
     html: `
   		<h1>${type}</h1>
-			<H3>이메일 : ${email}</h3>
+  		<H3>이메일 : ${email}</h3>
   		<h3>전화번호 : ${tel}</h3>
-  		<h3>관심분야 : ${category}</h3>
-  		<h3>전화번호 : ${tel}</h3>
-			<h3>문의내용</h3>
-			<div>
-			${message}
-			</div>
+  		<h3>문의내용</h3>
+  		<div>
+  		${message}
+  		</div>
 
   	`,
     text: message,
@@ -65,14 +66,12 @@ export const postUniversity = async (req, res) => {
       name,
       email,
       tel,
-      category,
       message,
       createdAt: Date.now(),
     });
-    res.json({ ok: "true" });
+    res.json({ result: 0, message: "상담신청이 완료되었습니다." });
   } catch (error) {
-    console.log(error);
-    res.json({ ok: "false", error: `에러가 발생했습니다. ${error.code}` });
+    res.json({ result: 2, message: `에러가 발생했습니다. ${error.code}` });
   }
 };
 
