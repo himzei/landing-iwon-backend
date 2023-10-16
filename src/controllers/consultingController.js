@@ -43,7 +43,7 @@ export const postUniversity = async (req, res) => {
 
   const mailOptions = {
     from: email,
-    to: ["himzei@gmail.com"],
+    to: ["himzei@gmail.com", "abab002@naver.com"],
     subject: "[대구한의대]" + name + "님의 " + type + " 문의",
     html: `
   		<h1>${type}</h1>
