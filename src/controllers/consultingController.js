@@ -47,6 +47,7 @@ export const postUniversity = async (req, res) => {
     subject: "[대구한의대]" + name + "님의 " + type + " 문의",
     html: `
   		<h1>${type}</h1>
+			<H3>이메일 : ${name}</h3>
   		<H3>이메일 : ${email}</h3>
   		<h3>전화번호 : ${tel}</h3>
   		<h3>문의내용</h3>
