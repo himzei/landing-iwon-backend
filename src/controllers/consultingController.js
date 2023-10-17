@@ -33,9 +33,7 @@ export const getList = async (req, res) => {
 };
 
 export const postUniversity = async (req, res) => {
-  const { name, email, tel, message, type } = req.body;
-
-  console.log(name, email, tel, message, type);
+  const { name, email, tel, message, type, major, grade } = req.body;
 
   if (name === "" || email === "" || tel === "") {
     res.json({ result: 1, message: "이름/이메일/전화번호를 입력해 주세요" });
@@ -47,9 +45,11 @@ export const postUniversity = async (req, res) => {
     subject: "[대구한의대]" + name + "님의 " + type + " 문의",
     html: `
   		<h1>${type}</h1>
-			<H3>이메일 : ${name}</h3>
+			<H3>이름 : ${name}</h3>
   		<H3>이메일 : ${email}</h3>
   		<h3>전화번호 : ${tel}</h3>
+  		<h3>학과 : ${major}</h3>
+  		<h3>학년 : ${grade}</h3>
   		<h3>문의내용</h3>
   		<div>
   		${message}
@@ -68,6 +68,8 @@ export const postUniversity = async (req, res) => {
       email,
       tel,
       message,
+      major,
+      grade,
       createdAt: Date.now(),
     });
     res.json({ result: 0, message: "상담신청이 완료되었습니다." });

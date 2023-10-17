@@ -5,6 +5,8 @@ const consultingSchema = new mongoose.Schema({
   name: String,
   tel: String,
   email: String,
+  grade: String,
+  major: String,
   category: [{ type: String }],
   message: String,
   createdAt: Date,
