@@ -146,6 +146,73 @@ export const postWrite = async (req, res) => {
     res.json({ ok: "false", error: `에러가 발생했습니다. ${error.code}` });
   }
 };
+export const postWriteYJ = async (req, res) => {
+  const { name, email, tel, category, message, type } = req.body;
+  console.log(name, tel, category, type);
+
+  if (name === "" || tel === "") {
+    res.json({ ok: false, error: "필수 입력사항을 작성하셔야 합니다. " });
+  }
+
+  const mailOptions = {
+    from: email,
+    to: ["himzei@gmail.com"],
+    subject: "[영진직업전문학교]" + name + "님의 " + type + " 문의",
+    html: `
+  		<h1>${type}</h1>
+  		<h3>전화번호 : ${tel}</h3>
+  		<h3>관심분야 : ${category}</h3>
+  		<h3>전화번호 : ${tel}</h3>
+  		<h3>문의내용</h3>
+  		<div>
+  		${message}
+  		</div>
+
+  	`,
+    text: message,
+  };
+
+  const info = await transporter.sendMail(mailOptions);
+  if (info.accepted !== null) {
+    res.json({ ok: true });
+  }
+
+  // 알림톡 시작
+  messageService.send({
+    to: tel,
+    from: "01071860119",
+    kakaoOptions: {
+      pfId: "KA01PF230329052246587htCxbWQq2P1",
+      templateId: "KA01TP230329070149638ka9toTFP1Hn",
+      // 치환문구가 없을 때의 기본 형태
+      variables: {
+        "#{name}": name,
+        "#{type}": type,
+        "#{urlManila}": "iwon-philippines.netlify.app",
+        "#{urlCebu}": "iwon-cebu.netlify.app",
+        "#{urlCebuMonth}": "iwon-cebu-month.netlify.app",
+        "#{urlDal}": "iwon-tarlac.netlify.app",
+        "#{urlBagio}": "iwon-baguio.netlify.app/",
+      },
+      disableSms: true,
+    },
+  });
+
+  // 알림톡 끝
+
+  try {
+    await Consulting.create({
+      name,
+      tel,
+      category,
+      createdAt: Date.now(),
+    });
+    res.json({ ok: "true" });
+  } catch (error) {
+    console.log(error);
+    res.json({ ok: "false", error: `에러가 발생했습니다. ${error.code}` });
+  }
+};
 
 export const postWriteIcan = async (req, res) => {
   const { name, email, tel, category, message, type } = req.body;
