@@ -159,7 +159,7 @@ export const postWriteYJ = async (req, res) => {
     to: [
       "himzei@gmail.com",
       "dltmdals7295@naver.com",
-      "schente@gmail.com",
+      "schentea@gmail.com ",
       "ckc9292@naver.com",
     ],
     subject: "[영진직업전문학교]" + name + "님의 " + type + " 문의",
