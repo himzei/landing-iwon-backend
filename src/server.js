@@ -19,7 +19,7 @@ let corsOptions = {
     "http://localhost:5173",
     "http://127.0.0.1:5502",
     "http://127.0.0.1:5503",
-    "https://sikkkkkw.github.io/YJ4-Project/",
+    "https://sikkkkkw.github.io",
   ],
   methods: ["GET", "POST"],
   credentials: true,
