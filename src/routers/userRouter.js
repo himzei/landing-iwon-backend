@@ -1,6 +1,7 @@
 import express from "express";
 import {
   accessToken,
+  kakaoAsyncRegister,
   loginSuccess,
   logout,
   postJoin,
@@ -16,5 +17,6 @@ userRouter.get("/accessToken", accessToken);
 userRouter.get("/refreshToken", refreshToken);
 userRouter.get("/login/success", loginSuccess);
 userRouter.post("/logout", logout);
+userRouter.get("/social/kakao/register", kakaoAsyncRegister);
 
 export default userRouter;

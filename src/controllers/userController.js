@@ -147,3 +147,8 @@ export const postJoin = async (req, res) => {
     res.status(500).json({ ok: "false", error: `에러가 발생햇씁니다.` });
   }
 };
+
+export const kakaoAsyncRegister = async (req, res) => {
+  const data = req.query;
+  res.json({ data });
+};
