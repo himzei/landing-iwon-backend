@@ -156,7 +156,12 @@ export const postWriteYJ = async (req, res) => {
 
   const mailOptions = {
     from: email,
-    to: ["himzei@gmail.com"],
+    to: [
+      "himzei@gmail.com",
+      "dltmdals7295@naver.com",
+      "schente@gmail.com",
+      "ckc9292@naver.com",
+    ],
     subject: "[영진직업전문학교]" + name + "님의 " + type + " 문의",
     html: `
   		<h1>${type}</h1>
@@ -188,8 +193,8 @@ export const postWriteYJ = async (req, res) => {
       variables: {
         "#{name}": name,
         "#{type}": type,
-        "#{urlManila}": "iwon-philippines.netlify.app",
-        "#{urlCebu}": "iwon-cebu.netlify.app",
+        "#{urlManila}": "www.yjjob.or.kr",
+        "#{urlCebu}": "www.yjjob.or.kr",
         "#{urlCebuMonth}": "iwon-cebu-month.netlify.app",
         "#{urlDal}": "iwon-tarlac.netlify.app",
         "#{urlBagio}": "iwon-baguio.netlify.app/",
