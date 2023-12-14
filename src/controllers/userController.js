@@ -149,6 +149,76 @@ export const postJoin = async (req, res) => {
 };
 
 export const kakaoAsyncRegister = async (req, res) => {
-  const data = req.query;
-  res.json({ data });
+  const { code } = req.query;
+
+  console.log(code);
+
+  try {
+    const KAKAO_BASE_PATH = "https://kauth.kakao.com/oauth/token";
+    const config = {
+      grant_type: "authorization_code",
+      client_id: process.env.KAKAO_CLIENT,
+      code: code,
+      redirect_uri: process.env.REDIRECT_URI,
+    };
+
+    const params = new URLSearchParams(config).toString();
+    const finalUrl = `${KAKAO_BASE_PATH}?${params}`;
+
+    const data = await fetch(finalUrl, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+    const tokenRequest = await data.json();
+
+    if ("access_token" in tokenRequest) {
+      const { access_token } = tokenRequest;
+      const userRequest = await fetch("https://kapi.kakao.com/v2/user/me", {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${access_token}`,
+        },
+      });
+      const userData = await userRequest.json();
+
+      console.log(userData);
+      // window.close();
+
+      // const {
+      //   kakao_account: {
+      //     profile: { thumbnail_image_url },
+      //     name,
+      //     email,
+      //     phone_number,
+      //     birthyear,
+      //     gender,
+      //   },
+      // } = userData;
+      // const phone = phone_number.replace(/[^\d]/g, "");
+      // const modifiedNumber = "0" + phone.toString().substring(2);
+      // const existingUser = await User.findOne({ email });
+
+      // if (existingUser) {
+      //   req.session.user = existingUser;
+      //   return res.status(200).json({ ok: "true" });
+      // } else {
+      //   const user = await User.create({
+      //     name,
+      //     username: email.split("@")[0],
+      //     email,
+      //     mobile: modifiedNumber,
+      //     gender,
+      //     birthyear,
+      //     avatarUrl: thumbnail_image_url,
+      //     missionCompleted: req.session.missionKakaoId,
+      //   });
+      //   req.session.user = user;
+      //   return res.status(200).json({ ok: "true", user });
+      // }
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
