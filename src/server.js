@@ -4,6 +4,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import userRouter from "./routers/userRouter";
 import consultingRouter from "./routers/consultingRouter";
+import session from "express-session";
+import MongoStore from "connect-mongo";
 
 const app = express();
 
@@ -30,6 +32,19 @@ app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+app.use(
+  session({
+    secret: process.env.ACCESS_SECRET,
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24,
+    },
+    store: MongoStore.create({
+      mongoUrl: process.env.DB_URL,
+    }),
+  })
+);
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/consulting", consultingRouter);

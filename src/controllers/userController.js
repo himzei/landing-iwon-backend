@@ -186,37 +186,39 @@ export const kakaoAsyncRegister = async (req, res) => {
       console.log(userData);
       // window.close();
 
-      // const {
-      //   kakao_account: {
-      //     profile: { thumbnail_image_url },
-      //     name,
-      //     email,
-      //     phone_number,
-      //     birthyear,
-      //     gender,
-      //   },
-      // } = userData;
-      // const phone = phone_number.replace(/[^\d]/g, "");
-      // const modifiedNumber = "0" + phone.toString().substring(2);
-      // const existingUser = await User.findOne({ email });
+      const {
+        kakao_account: {
+          profile: { thumbnail_image_url },
+          name,
+          email,
+          phone_number,
+          birthyear,
+          gender,
+        },
+      } = userData;
+      const phone = phone_number.replace(/[^\d]/g, "");
+      const modifiedNumber = "0" + phone.toString().substring(2);
+      const existingUser = await User.findOne({ email });
 
-      // if (existingUser) {
-      //   req.session.user = existingUser;
-      //   return res.status(200).json({ ok: "true" });
-      // } else {
-      //   const user = await User.create({
-      //     name,
-      //     username: email.split("@")[0],
-      //     email,
-      //     mobile: modifiedNumber,
-      //     gender,
-      //     birthyear,
-      //     avatarUrl: thumbnail_image_url,
-      //     missionCompleted: req.session.missionKakaoId,
-      //   });
-      //   req.session.user = user;
-      //   return res.status(200).json({ ok: "true", user });
-      // }
+      if (existingUser) {
+        req.session.user = existingUser;
+
+        return res.status(200).json({ ok: "true" });
+      } else {
+        const user = await User.create({
+          name,
+          username: email.split("@")[0],
+          email,
+          mobile: modifiedNumber,
+          gender,
+          birthyear,
+          avatarUrl: thumbnail_image_url,
+          missionCompleted: req.session.missionKakaoId,
+        });
+        req.session.user = user;
+
+        return res.status(200).json({ ok: "true", user });
+      }
     }
   } catch (error) {
     console.log(error);
