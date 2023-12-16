@@ -172,7 +172,6 @@ export const postWriteYJ = async (req, res) => {
   		<div>
   		${message}
   		</div>
-
   	`,
     text: message,
   };
