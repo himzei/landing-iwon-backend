@@ -6,6 +6,9 @@ import userRouter from "./routers/userRouter";
 import consultingRouter from "./routers/consultingRouter";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import swaggerjsdoc from "swagger-jsdoc";
+import swaggerui from "swagger-ui-express";
+import missionRouter from "./routers/missionRouter";
 
 const app = express();
 
@@ -46,7 +49,27 @@ app.use(
   })
 );
 
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "API Docs",
+      version: "0.1",
+    },
+    servers: [
+      {
+        url: "http://localhost:3000",
+      },
+    ],
+  },
+  apis: ["./routers/*.js"],
+};
+
+const spacs = swaggerjsdoc(options);
+app.use("/api-docs", swaggerui.serve, swaggerui.setup(spacs));
+
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/mission", missionRouter);
 app.use("/api/v1/consulting", consultingRouter);
 
 export default app;

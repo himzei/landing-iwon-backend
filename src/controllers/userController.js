@@ -2,13 +2,15 @@ import User from "../models/User";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
+const FRONT_URL = "https://sikkkkkw.github.io/YJ4-Project";
+
 export const accessToken = async (req, res) => {
   try {
     const token = req.cookies.accessToken;
     const data = jwt.verify(token, process.env.ACCESS_SECRET);
     const userData = await User.findOne({ _id: data.id });
 
-    console.log(userData.email);
+    // console.log(userData.email);
     res.status(200).json({ ok: true, email: userData.email });
   } catch (error) {
     res.status(500).json({ ok: false });
@@ -45,10 +47,10 @@ export const refreshToken = async (req, res) => {
 
 export const loginSuccess = async (req, res) => {
   try {
-    const token = req.cookies.accessToken;
-    const data = jwt.verify(token, process.env.ACCESS_SECRET);
-    const userData = await User.findOne({ _id: data.id });
-
+    const id = req.body.id;
+    // const data = jwt.verify(token, process.env.ACCESS_SECRET);
+    const userData = await User.findOne({ _id: id });
+    // console.log(userData);
     res
       .status(200)
       .json({ ok: true, email: userData.email, username: userData.username });
@@ -123,7 +125,7 @@ export const postLogin = async (req, res) => {
 export const postJoin = async (req, res) => {
   const { username, email, password, password2 } = req.body;
 
-  console.log(username, email, password, password2);
+  // console.log(username, email, password, password2);
 
   if (password !== password2) {
     res.json({ ok: "false", error: "입력하신 패스워드가 다릅니다." });
@@ -151,7 +153,7 @@ export const postJoin = async (req, res) => {
 export const kakaoAsyncRegister = async (req, res) => {
   const { code } = req.query;
 
-  console.log(code);
+  // console.log(code);
 
   try {
     const KAKAO_BASE_PATH = "https://kauth.kakao.com/oauth/token";
@@ -183,7 +185,7 @@ export const kakaoAsyncRegister = async (req, res) => {
       });
       const userData = await userRequest.json();
 
-      console.log(userData);
+      // console.log(userData);
       // window.close();
 
       const {
@@ -192,8 +194,6 @@ export const kakaoAsyncRegister = async (req, res) => {
           name,
           email,
           phone_number,
-          birthyear,
-          gender,
         },
       } = userData;
       const phone = phone_number.replace(/[^\d]/g, "");
@@ -201,23 +201,25 @@ export const kakaoAsyncRegister = async (req, res) => {
       const existingUser = await User.findOne({ email });
 
       if (existingUser) {
-        req.session.user = existingUser;
+        const user = existingUser;
+        // console.log(req.session.user);
 
-        return res.status(200).json({ ok: "true" });
+        res.status(200).redirect(`${FRONT_URL}/eventpage.html?id=${user._id}`);
       } else {
         const user = await User.create({
-          name,
           username: email.split("@")[0],
           email,
+          name,
           mobile: modifiedNumber,
-          gender,
-          birthyear,
           avatarUrl: thumbnail_image_url,
           missionCompleted: req.session.missionKakaoId,
         });
-        req.session.user = user;
 
-        return res.status(200).json({ ok: "true", user });
+        // console.log(req.session.user);
+
+        res
+          .status(200)
+          .redirect(`http://127.0.0.1:5503/eventpage.html?id=${user._id}`);
       }
     }
   } catch (error) {
