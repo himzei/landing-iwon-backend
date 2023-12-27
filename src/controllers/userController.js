@@ -1,7 +1,7 @@
 import User from "../models/User";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import fetch from "node-fetch";
+// import fetch from "node-fetch";
 
 const FRONT_URL = "https://sikkkkkw.github.io/YJ4-Project";
 
