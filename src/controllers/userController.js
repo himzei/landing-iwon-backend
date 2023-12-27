@@ -1,6 +1,7 @@
 import User from "../models/User";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+const fetch = require("node-fetch");
 
 const FRONT_URL = "https://sikkkkkw.github.io/YJ4-Project";
 
@@ -153,7 +154,7 @@ export const postJoin = async (req, res) => {
 export const kakaoAsyncRegister = async (req, res) => {
   const { code } = req.query;
 
-  // console.log(code);
+  console.log(code);
 
   try {
     const KAKAO_BASE_PATH = "https://kauth.kakao.com/oauth/token";
