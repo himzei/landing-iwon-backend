@@ -217,9 +217,7 @@ export const kakaoAsyncRegister = async (req, res) => {
 
         // console.log(req.session.user);
 
-        res
-          .status(200)
-          .redirect(`http://127.0.0.1:5503/eventpage.html?id=${user._id}`);
+        res.status(200).redirect(`${FRONT_URL}/eventpage.html?id=${user._id}`);
       }
     }
   } catch (error) {
