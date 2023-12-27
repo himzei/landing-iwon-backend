@@ -185,7 +185,7 @@ export const kakaoAsyncRegister = async (req, res) => {
       });
       const userData = await userRequest.json();
 
-      // console.log(userData);
+      console.log(userData);
       // window.close();
 
       const {
