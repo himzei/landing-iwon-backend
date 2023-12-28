@@ -25,6 +25,7 @@ let corsOptions = {
     "http://127.0.0.1:5502",
     "http://127.0.0.1:5503",
     "https://sikkkkkw.github.io",
+    "https://lustrous-dieffenbachia-0e5fd9.netlify.app",
   ],
   methods: ["GET", "POST"],
   credentials: true,
