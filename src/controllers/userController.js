@@ -154,7 +154,7 @@ export const postJoin = async (req, res) => {
 export const kakaoAsyncRegister = async (req, res) => {
   const { code } = req.query;
 
-  console.log(code);
+  // console.log(code);
 
   try {
     const KAKAO_BASE_PATH = "https://kauth.kakao.com/oauth/token";
@@ -185,9 +185,7 @@ export const kakaoAsyncRegister = async (req, res) => {
         },
       });
       const userData = await userRequest.json();
-
       console.log(userData);
-      // window.close();
 
       const {
         kakao_account: {
@@ -195,11 +193,37 @@ export const kakaoAsyncRegister = async (req, res) => {
           name,
           email,
           phone_number,
+          birthyear,
+          birthday,
+          gender,
         },
       } = userData;
       const phone = phone_number.replace(/[^\d]/g, "");
       const modifiedNumber = "0" + phone.toString().substring(2);
       const existingUser = await User.findOne({ email });
+
+      // 카톡채널 레지스터
+      const CHANNEL_URL =
+        "https://kapi.kakao.com/v1/talkchannel/create/target_user_file";
+      const channelRequest = await fetch(CHANNEL_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `KakaoAK ${process.env.KAKAO_CLIENT}`,
+        },
+        data: JSON.stringify({
+          channel_public_id: "_gqqxbM",
+          file_name: "vip고객리스트",
+          schema: {
+            생년월일: birthyear,
+            성별: gender,
+            age: 19,
+          },
+        }),
+      });
+
+      const resultChannel = await channelRequest.json();
+      console.log(resultChannel);
 
       if (existingUser) {
         const user = existingUser;
